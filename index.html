@@ -267,12 +267,52 @@
   footer { margin-top: 96px; padding: 32px 0 56px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
   footer p { margin: 0 0 6px; }
 
+  /* Empfehlung */
+  .rec { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
+  .rec-main { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; position: relative; overflow: hidden; }
+  .rec-main::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--c-cz); }
+  .rec-main .tag { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .rec-main h3 { font-size: clamp(24px, 3vw, 30px); line-height: 1.2; margin-bottom: 14px; }
+  .rec-main > p { color: var(--text-2); font-size: 16.5px; }
+  .rec-nums { display: flex; flex-wrap: wrap; gap: 10px 32px; margin: 22px 0 24px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .rec-nums div { display: grid; }
+  .rec-nums b { font-family: var(--serif); font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .rec-nums span { font-size: 13px; color: var(--muted); }
+  .why { margin: 0; padding: 0; list-style: none; counter-reset: why; }
+  .why li { position: relative; padding: 0 0 14px 34px; font-size: 15.5px; color: var(--text-2); counter-increment: why; }
+  .why li::before { content: counter(why); position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong); font-size: 12px; display: grid; place-items: center; color: var(--text); }
+  .why li b { color: var(--text); font-weight: 620; }
+  .alts { display: grid; gap: 12px; align-content: start; }
+  .alt { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+  .alt .name { display: flex; align-items: center; gap: 9px; font-weight: 620; margin-bottom: 4px; }
+  .alt .when { font-size: 15px; color: var(--text); margin: 0 0 6px; }
+  .alt .but { font-size: 14.5px; color: var(--text-2); margin: 0; }
+  .alts-h { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 4px 0 0; }
+
+  /* Formate */
+  .formats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .format { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; }
+  .format.best { border-color: var(--text); box-shadow: 0 0 0 1px var(--text); }
+  .format .flag { align-self: flex-start; font-size: 12px; font-weight: 620; letter-spacing: .04em; color: var(--bg); background: var(--text); border-radius: 999px; padding: 3px 10px; margin-bottom: 14px; }
+  .format .flag.ghost { color: var(--muted); background: none; border: 1px solid var(--line); }
+  .format h3 { margin-bottom: 8px; }
+  .format > p { font-size: 15.5px; color: var(--text-2); }
+  .format dl { margin: 6px 0 18px; display: grid; gap: 0; }
+  .format dl div { display: grid; grid-template-columns: 8.5em 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .format dt { color: var(--muted); }
+  .format dd { margin: 0; color: var(--text); }
+  .format .fit { margin-top: auto; font-size: 14.5px; color: var(--text-2); padding-top: 4px; }
+  .format .fit b { color: var(--text); font-weight: 620; }
+  .tips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
+  .tips .panel h3 { font-size: 18px; }
+  .tips .panel p { font-size: 15px; }
+
   /* Responsiv */
   @media (max-width: 960px) {
     .glance, .results { grid-template-columns: 1fr 1fr; }
     .glance > div:nth-child(3) { border-left: 0; }
     .glance > div:nth-child(n+3) { border-top: 1px solid var(--line); }
-    .three, .after { grid-template-columns: 1fr; }
+    .three, .after, .formats, .tips, .rec { grid-template-columns: 1fr; }
     .who, .profiles { grid-template-columns: 1fr; }
   }
   @media (max-width: 760px) {
@@ -286,7 +326,7 @@
     .sec-head p { font-size: 17px; }
     .indent { margin-left: 0; }
     .terms { grid-template-columns: 1fr; padding: 4px 20px 18px; }
-    .profile, .chooser, .chart { padding: 22px 20px; }
+    .profile, .chooser, .chart, .rec-main, .format { padding: 22px 20px; }
     .pc { grid-template-columns: 1fr; gap: 14px; }
     .row, .axis { grid-template-columns: 1fr; gap: 6px; }
     .axis .lblpad { display: none; }
@@ -323,14 +363,15 @@
   <div class="wrap">
     <p class="kicker">Privat fliegen · Übersicht für Einsteiger</p>
     <h1>PPL, LAPL oder UL-Schein: welcher Weg passt?</h1>
-    <p class="lead">Wer privat ein Flugzeug fliegen will, hat mehrere Lizenzen zur Auswahl. Sie unterscheiden sich darin, welche Flugzeuge man fliegen darf, wie viele Leute mitkommen dürfen und in welchen Ländern die Lizenz gilt. Diese Seite erklärt zuerst die Grundlagen und vergleicht dann vier konkrete Wege.</p>
+    <p class="lead">Wer privat ein Flugzeug fliegen will, hat mehrere Lizenzen zur Auswahl. Sie unterscheiden sich darin, welche Flugzeuge man fliegen darf, wie viele Leute mitkommen dürfen und in welchen Ländern die Lizenz gilt. Diese Seite sagt zuerst, welcher Weg aus unserer Sicht am meisten Sinn ergibt und in welchem Format. Danach folgen Erklärungen und der genaue Vergleich.</p>
     <ul class="toc">
-      <li><a href="#grundlagen"><span>01</span>Grundlagen</a></li>
-      <li><a href="#optionen"><span>02</span>Die vier Wege</a></li>
-      <li><a href="#auswahl"><span>03</span>Was ist dir wichtig?</a></li>
-      <li><a href="#kosten"><span>04</span>Kosten</a></li>
-      <li><a href="#vergleich"><span>05</span>Alle Details</a></li>
-      <li><a href="#danach"><span>06</span>Nach der Prüfung</a></li>
+      <li><a href="#empfehlung"><span>01</span>Was am meisten Sinn ergibt</a></li>
+      <li><a href="#format"><span>02</span>In welchem Format</a></li>
+      <li><a href="#grundlagen"><span>03</span>Kurz erklärt</a></li>
+      <li><a href="#optionen"><span>04</span>Die vier Lizenzen</a></li>
+      <li><a href="#auswahl"><span>05</span>Was ist dir wichtig?</a></li>
+      <li><a href="#kosten"><span>06</span>Kosten</a></li>
+      <li><a href="#vergleich"><span>07</span>Alle Details</a></li>
     </ul>
 
     <div class="glance" aria-label="Kurzüberblick">
@@ -376,31 +417,129 @@
 
 <main class="wrap">
 
-  <!-- 01 Grundlagen -->
-  <section class="block" id="grundlagen" aria-labelledby="h-grundlagen">
+  <!-- 01 Empfehlung -->
+  <section class="block" id="empfehlung" aria-labelledby="h-empfehlung">
     <div class="sec-head">
       <div class="sec-no">01</div>
       <div>
-        <h2 id="h-grundlagen">Grundlagen: Was man zum Fliegen braucht</h2>
-        <p>Egal welcher Schein: Am Ende braucht man immer drei Dinge. Und man muss wissen, welche Behörde die Lizenz ausstellt, denn davon hängt ab, wo sie gilt.</p>
+        <h2 id="h-empfehlung">Was am meisten Sinn ergibt</h2>
+        <p>Unsere Einschätzung für den Fall, dass ihr in Deutschland wohnt und vor allem in Deutschland und Europa fliegen wollt, gern auch mit Freunden an Bord.</p>
       </div>
     </div>
 
-    <div class="three">
+    <div class="rec">
+      <article class="rec-main">
+        <div class="tag">Empfehlung</div>
+        <h3>EASA-PPL(A) in Tschechien, Theorie vorab, Flugpraxis in mehreren Blöcken vor Ort</h3>
+        <p>Die volle europäische Lizenz zum günstigsten Preis, den wir gefunden haben. Sie ist dieselbe Lizenz, die man in Deutschland bekommt, und hält euch später alle Wege offen.</p>
+        <div class="rec-nums">
+          <div><b>ca. 7.700 €</b><span>Ausbildung laut Preisliste</span></div>
+          <div><b>45 h</b><span>Mindestflugstunden</span></div>
+          <div><b>sofort</b><span>gültig in Deutschland</span></div>
+        </div>
+        <ol class="why">
+          <li><b>Keine Umschreibung.</b> Eine in Tschechien erteilte EASA-Lizenz gilt ohne weitere Schritte in Deutschland und allen anderen EASA-Staaten.</li>
+          <li><b>Die LAPL spart wenig.</b> Sie braucht 15 Pflichtstunden weniger. Zu den Preisen in Točná sind das rund 2.400–2.500&nbsp;€. Dafür gibt es höchstens drei Mitflieger, keine schwereren Flugzeuge und keine Anerkennung außerhalb Europas. Wer später doch aufstockt, zahlt die Differenz zusätzlich.</li>
+          <li><b>Malaysia lohnt sich nur vor Ort.</b> Die malaysische Lizenz ist keine EASA-Lizenz. Für die Umschreibung braucht man unter anderem mindestens 100 Flugstunden. Wer in Deutschland fliegen will, muss nach der Ausbildung also weitere Stunden sammeln und zusätzliche Prüfungen ablegen.</li>
+          <li><b>Der UL-Schein ist eine andere Kategorie.</b> Er ist günstig, gilt aber nur für Ultraleichtflugzeuge mit einem Mitflieger und wird später nur teilweise angerechnet.</li>
+        </ol>
+      </article>
+
+      <div class="alts">
+        <p class="alts-h">Andere Wege ergeben Sinn, wenn …</p>
+        <div class="alt">
+          <div class="name"><span class="dot ul"></span>UL-Schein</div>
+          <p class="when">… ihr nur zum Spaß in der Region fliegen wollt, höchstens zu zweit.</p>
+          <p class="but">Am günstigsten, auch beim Mieten. Für mehr Mitflieger oder Reisen braucht man später trotzdem eine PPL.</p>
+        </div>
+        <div class="alt">
+          <div class="name"><span class="dot lapl"></span>LAPL</div>
+          <p class="when">… das Budget wirklich knapp ist und ihr sicher bei kleinen Flugzeugen in Europa bleibt.</p>
+          <p class="but">Gleiche Theorie, gleiche Flugschule. Die Ersparnis gegenüber der PPL ist klein.</p>
+        </div>
+        <div class="alt">
+          <div class="name"><span class="dot my"></span>PPL Malaysia</div>
+          <p class="when">… ihr ohnehin länger in Asien lebt oder dort fliegen wollt.</p>
+          <p class="but">Für Fliegen in Deutschland ist sie der teuerste und umständlichste Weg.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Format -->
+  <section class="block" id="format" aria-labelledby="h-format">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <div>
+        <h2 id="h-format">In welchem Format?</h2>
+        <p>Die Lizenz ist dieselbe, egal wie man die Ausbildung organisiert. Der Unterschied liegt darin, wie viel Urlaub man braucht, wie lange es dauert und was Reise und Unterkunft zusätzlich kosten.</p>
+      </div>
+    </div>
+
+    <div class="formats">
+      <article class="format">
+        <span class="flag ghost">Option A</span>
+        <h3>Intensiv am Stück</h3>
+        <p>Theorie vorab lernen, dann mehrere Wochen am Stück vor Ort fliegen, möglichst jeden Tag.</p>
+        <dl>
+          <div><dt>Dauer vor Ort</dt><dd>einige Wochen <span class="badge est">Erfahrungswert</span></dd></div>
+          <div><dt>Urlaub</dt><dd>viel, an einem Stück</dd></div>
+          <div><dt>Wetterrisiko</dt><dd>hoch: schlechte Tage verlängern den Aufenthalt</dd></div>
+          <div><dt>Zusatzkosten</dt><dd>eine Anreise, aber lange Unterkunft</dd></div>
+        </dl>
+        <p class="fit"><b>Passt, wenn</b> ihr einen langen Block freinehmen könnt, am besten im Sommer.</p>
+      </article>
+
+      <article class="format best">
+        <span class="flag">Empfehlung</span>
+        <h3>Theorie vorab, Praxis in Blöcken</h3>
+        <p>Theorie über Fernunterricht oder Kurs lernen, dann mehrere Flugwochen oder lange Wochenenden in Tschechien, verteilt über einige Monate.</p>
+        <dl>
+          <div><dt>Dauer gesamt</dt><dd>einige Monate</dd></div>
+          <div><dt>Urlaub</dt><dd>mehrere kurze Blöcke</dd></div>
+          <div><dt>Wetterrisiko</dt><dd>mittel: Blöcke lassen sich verschieben</dd></div>
+          <div><dt>Zusatzkosten</dt><dd>mehrere Anreisen, kürzere Aufenthalte</dd></div>
+        </dl>
+        <p class="fit"><b>Passt, wenn</b> ihr berufstätig seid und gut nach Prag oder Tschechien kommt. Der Aeroklub Točná beschreibt seine Ausbildung genau so: Beginn jederzeit, Dauer je nachdem, wie oft man da ist.</p>
+      </article>
+
+      <article class="format">
+        <span class="flag ghost">Option C</span>
+        <h3>Nebenbei in Deutschland</h3>
+        <p>Ausbildung in einem Verein oder einer Flugschule in der Nähe, meist an Wochenenden.</p>
+        <dl>
+          <div><dt>Dauer gesamt</dt><dd>oft ein bis zwei Jahre <span class="badge est">Erfahrungswert</span></dd></div>
+          <div><dt>Urlaub</dt><dd>kaum</dd></div>
+          <div><dt>Wetterrisiko</dt><dd>gering: man fliegt, wenn das Wetter passt</dd></div>
+          <div><dt>Zusatzkosten</dt><dd>keine Reise, aber in der Regel höhere Stundenpreise</dd></div>
+        </dl>
+        <p class="fit"><b>Passt, wenn</b> ihr keine Zeit für Reisen habt oder ohnehin einem Verein vor Ort beitreten wollt.</p>
+      </article>
+    </div>
+
+    <div class="tips">
       <div class="panel">
-        <div class="step">1 · Die Lizenz</div>
-        <h3>Ausbildung und Prüfung</h3>
-        <p>Theorieunterricht (Luftrecht, Wetter, Navigation, Technik und mehr) mit schriftlicher Prüfung. Dazu Flugstunden mit Fluglehrer und allein. Am Ende steht eine praktische Prüfung mit einem Prüfer.</p>
+        <h3>Zu mehreren ausbilden</h3>
+        <p>Wer zu zweit oder zu dritt geht, teilt sich Anreise und Unterkunft. Kleine Vereine haben aber oft nur wenige Flugzeuge und Lehrer. Klärt vorab, wie viele Schüler gleichzeitig fliegen können.</p>
       </div>
       <div class="panel">
-        <div class="step">2 · Das Medical</div>
-        <h3>Flugmedizinische Tauglichkeit</h3>
-        <p>Eine Untersuchung beim Fliegerarzt. Sie muss vor dem ersten Alleinflug vorliegen, also früh in der Ausbildung. Für die PPL ist es das Medical Klasse 2, für LAPL und UL das etwas einfachere LAPL-Medical.</p>
+        <h3>Sprache</h3>
+        <p>Die Theorieprüfung legt man bei der Behörde des Ausbildungslands ab, in Tschechien beim Úřad pro civilní letectví (ÚCL). Fragt nach, ob Unterricht und Prüfung auf Englisch möglich sind.</p>
       </div>
       <div class="panel">
-        <div class="step">3 · Die Berechtigung</div>
-        <h3>Für welches Flugzeug</h3>
-        <p>Die Lizenz gilt nur für bestimmte Flugzeugarten. Für Einsteiger ist das fast immer „SEP“: einmotorige Kolbenflugzeuge wie eine Cessna 152 oder 172. Damit sie gültig bleibt, muss man regelmäßig fliegen.</p>
+        <h3>Vorab anfragen</h3>
+        <p>Was ist im Preis enthalten (Prüfungsgebühr, Landegebühren, Treibstoffzuschlag)? Wie viele Stunden brauchen Schüler im Schnitt? Gibt es Unterkünfte am Platz?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Kurz erklärt -->
+  <section class="block" id="grundlagen" aria-labelledby="h-grundlagen">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <div>
+        <h2 id="h-grundlagen">Kurz erklärt: Was die Lizenzen unterscheidet</h2>
+        <p>Der wichtigste Unterschied ist, wer die Lizenz ausstellt. Davon hängt ab, wo und mit welchen Flugzeugen man damit fliegen darf.</p>
       </div>
     </div>
 
@@ -429,7 +568,7 @@
     </div>
 
     <details class="glossary">
-      <summary>Begriffe kurz erklärt <span>PPL, LAPL, UL, Medical, SEP …</span></summary>
+      <summary>Begriffe kurz erklärt <span>PPL, LAPL, UL, SEP …</span></summary>
       <dl class="terms">
         <div><dt>PPL(A)</dt><dd>Private Pilot Licence (Aeroplane). Die klassische Privatpilotenlizenz für Flugzeuge, nach ICAO-Standard.</dd></div>
         <div><dt>LAPL(A)</dt><dd>Light Aircraft Pilot Licence. Eine kleinere Lizenz, die es nur in Europa (EASA) gibt. Kürzere Ausbildung, dafür mehr Einschränkungen.</dd></div>
@@ -447,12 +586,12 @@
     </details>
   </section>
 
-  <!-- 02 Optionen -->
+  <!-- 04 Optionen -->
   <section class="block" id="optionen" aria-labelledby="h-optionen">
     <div class="sec-head">
-      <div class="sec-no">02</div>
+      <div class="sec-no">04</div>
       <div>
-        <h2 id="h-optionen">Die vier Wege im Einzelnen</h2>
+        <h2 id="h-optionen">Die vier Lizenzen im Einzelnen</h2>
         <p>Zwei Wege führen zur vollen Privatpilotenlizenz (PPL), einmal in Europa und einmal in Malaysia. Die beiden anderen sind kleinere Lizenzen mit kürzerer Ausbildung.</p>
       </div>
     </div>
@@ -495,7 +634,7 @@
       <article class="profile lapl">
         <div class="tag">Kleine Lizenz · nur EASA</div>
         <h3>EASA-LAPL(A)</h3>
-        <p class="gist">Die „kleine Schwester“ der PPL, die es nur in Europa gibt. Weniger Pflichtstunden und ein einfacheres Medical. Dafür gilt sie nur für leichtere Flugzeuge und höchstens drei Mitflieger.</p>
+        <p class="gist">Die „kleine Schwester“ der PPL, die es nur in Europa gibt. Weniger Pflichtstunden, dafür gilt sie nur für leichtere Flugzeuge und höchstens drei Mitflieger.</p>
         <dl class="facts">
           <div><dt>Flugstunden</dt><dd>mind. 30</dd></div>
           <div><dt>Kosten</dt><dd>ca. 5.500–10.000 € <span class="badge est">Schätzung</span></dd></div>
@@ -531,7 +670,7 @@
   <!-- 03 Auswahl -->
   <section class="block" id="auswahl" aria-labelledby="h-auswahl">
     <div class="sec-head">
-      <div class="sec-no">03</div>
+      <div class="sec-no">05</div>
       <div>
         <h2 id="h-auswahl">Was ist dir wichtig?</h2>
         <p>Wähle aus, was du später machen willst. Darunter siehst du für jeden Weg, ob er dazu passt und woran es hakt.</p>
@@ -551,7 +690,7 @@
   <!-- 04 Kosten -->
   <section class="block" id="kosten" aria-labelledby="h-kosten">
     <div class="sec-head">
-      <div class="sec-no">04</div>
+      <div class="sec-no">06</div>
       <div>
         <h2 id="h-kosten">Was die Ausbildung kostet</h2>
         <p>Die Spannen gelten für die Mindeststundenzahl. Viele brauchen mehr Stunden als das Minimum, die tatsächlichen Kosten liegen dann entsprechend höher.</p>
@@ -578,7 +717,7 @@
   <!-- 05 Vergleich -->
   <section class="block" id="vergleich" aria-labelledby="h-vergleich">
     <div class="sec-head">
-      <div class="sec-no">05</div>
+      <div class="sec-no">07</div>
       <div>
         <h2 id="h-vergleich">Alle Details im Vergleich</h2>
         <p>Für alle, die es genau wissen wollen. Die Angaben zu EASA beruhen auf der EU-Verordnung 1178/2011 (Part-FCL).</p>
@@ -611,13 +750,6 @@
             <td data-label="PPL MY">ca. 10.000–19.000 € <span class="badge unv">ungeprüft</span></td>
             <td data-label="LAPL">ca. 5.500–10.000 € <span class="badge est">Schätzung</span></td>
             <td data-label="UL">ca. 5.000–10.000 € <span class="badge est">Schätzung</span></td>
-          </tr>
-          <tr>
-            <th scope="row">Medical</th>
-            <td data-label="PPL CZ">Klasse 2</td>
-            <td data-label="PPL MY">malaysisches Medical Klasse 2</td>
-            <td data-label="LAPL">LAPL-Medical</td>
-            <td data-label="UL">in Deutschland LAPL-Medical</td>
           </tr>
 
           <tr class="group"><th colspan="5" scope="colgroup">Was man fliegen darf</th></tr>
@@ -669,33 +801,6 @@
       </table>
     </div>
     <p class="note">* Mit gültiger Klassenberechtigung, gültigem Medical und der nötigen Flugpraxis. EASA-Lizenzen gelten für Flugzeuge, die in einem EASA-Staat registriert sind. Für Flugzeuge aus Drittstaaten, etwa mit US-Kennzeichen, gelten die Regeln dieses Staates.</p>
-  </section>
-
-  <!-- 06 Danach -->
-  <section class="block" id="danach" aria-labelledby="h-danach">
-    <div class="sec-head">
-      <div class="sec-no">06</div>
-      <div>
-        <h2 id="h-danach">Nach der Prüfung: Was laufend dazukommt</h2>
-        <p>Mit dem Schein ist es nicht getan. Damit er gültig bleibt, muss man regelmäßig fliegen. Die Angaben gelten für die EASA-Lizenzen.</p>
-      </div>
-    </div>
-    <div class="after">
-      <div class="panel">
-        <h3>In Übung bleiben</h3>
-        <p><strong>PPL:</strong> Die SEP-Berechtigung gilt zwei Jahre. Verlängert wird sie mit 12 Flugstunden im letzten Jahr, darunter ein Übungsflug mit Lehrer, oder mit einer Prüfung.</p>
-        <p><strong>LAPL:</strong> Fortlaufend 12 Flugstunden in den letzten 24 Monaten, darunter ein Übungsflug mit Lehrer.</p>
-      </div>
-      <div class="panel">
-        <h3>Mitflieger mitnehmen</h3>
-        <p>Wer Passagiere mitnimmt, muss in den letzten 90 Tagen mindestens drei Starts und Landungen selbst geflogen sein. Das gilt für PPL und LAPL.</p>
-      </div>
-      <div class="panel">
-        <h3>Medical erneuern</h3>
-        <p>Klasse 2 und LAPL-Medical gelten bis zum 40. Geburtstag fünf Jahre, danach meist zwei Jahre. Ab 50 wird das Klasse-2-Medical jährlich erneuert.</p>
-        <p class="small">Dazu kommen Flugzeugmiete oder Vereinsbeitrag. Die Mietpreise sind je nach Verein sehr unterschiedlich und hier nicht erfasst.</p>
-      </div>
-    </div>
   </section>
 
   <!-- Quellen -->
