@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flugscheine im Vergleich: PPL, LAPL und UL</title>
+<meta name="description" content="Sachlicher Vergleich von EASA-PPL(A) in Tschechien, ICAO-PPL in Malaysia, EASA-LAPL(A) und nationalem UL-Schein: Kosten, Mindeststunden, Anerkennung und Rechte.">
+<style>
+  :root {
+    --text: #1d2329;
+    --muted: #5f6b76;
+    --line: #e4e7ea;
+    --bg: #ffffff;
+    --bg-soft: #f6f7f8;
+    --accent: #2f5d7c;
+    --warn-bg: #fbf6ec;
+    --warn-line: #d8c39a;
+    --radius: 10px;
+    --max: 1040px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  header { padding: 72px 0 40px; border-bottom: 1px solid var(--line); }
+  .eyebrow { margin: 0 0 12px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 0 0 16px; font-size: clamp(30px, 5vw, 44px); line-height: 1.15; font-weight: 650; letter-spacing: -.01em; }
+  .lead { margin: 0; max-width: 680px; font-size: 19px; color: var(--muted); }
+
+  section { padding: 56px 0 0; }
+  h2 { margin: 0 0 8px; font-size: 24px; font-weight: 650; letter-spacing: -.005em; }
+  h3 { margin: 0 0 4px; font-size: 17px; font-weight: 650; }
+  .intro { margin: 0 0 28px; max-width: 680px; color: var(--muted); }
+  p { margin: 0 0 16px; }
+  .small { font-size: 14px; color: var(--muted); }
+
+  /* Kostenübersicht */
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; }
+  .card .sys { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .card .price { font-size: 24px; font-weight: 650; line-height: 1.25; font-variant-numeric: tabular-nums; }
+  .card .basis { font-size: 14px; color: var(--muted); margin: 6px 0 16px; }
+  .card .meta { margin-top: auto; font-size: 14px; }
+
+  .badge {
+    display: inline-block; font-size: 12px; line-height: 1.4; font-weight: 600;
+    padding: 2px 8px; border-radius: 999px; border: 1px solid; white-space: nowrap;
+    vertical-align: 1px;
+  }
+  .badge.src { color: #2d6a4f; border-color: #b7d8c6; background: #f1f8f4; }
+  .badge.est { color: #7a5b17; border-color: #e3cf9f; background: #fdf8ec; }
+  .badge.unv { color: #8a3b2e; border-color: #e8bfb6; background: #fcf1ee; }
+
+  /* Vergleichstabelle */
+  .table-wrap { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  caption { text-align: left; padding: 0 0 12px; font-size: 14px; color: var(--muted); }
+  th, td { padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  thead th { background: var(--bg-soft); font-size: 14px; font-weight: 650; }
+  thead th span { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+  tbody th { font-weight: 600; width: 17%; background: #fcfcfd; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  td { width: 20.75%; }
+
+  .footnote { margin-top: 14px; }
+
+  /* Hinweise */
+  .notes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px; }
+  .notes h3 { margin-bottom: 6px; }
+  .notes p { font-size: 16px; }
+  .callout { background: var(--warn-bg); border-left: 3px solid var(--warn-line); border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; font-size: 15px; }
+  .callout p:last-child { margin: 0; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 24px; padding: 0; list-style: none; font-size: 14px; color: var(--muted); }
+
+  .sources { padding: 0; margin: 0; list-style: none; border-top: 1px solid var(--line); }
+  .sources li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .sources li span { display: block; font-size: 14px; color: var(--muted); }
+
+  footer { margin-top: 64px; padding: 28px 0 48px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+  footer p { margin: 0 0 6px; }
+
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Tabelle auf schmalen Bildschirmen als gestapelte Blöcke */
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 18px; }
+    header { padding: 48px 0 32px; }
+    .lead { font-size: 17px; }
+    section { padding-top: 44px; }
+    .notes { grid-template-columns: 1fr; }
+
+    .table-wrap { border: 0; border-radius: 0; overflow: visible; }
+    table, thead, tbody, tr, th, td { display: block; width: 100%; }
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    tbody tr { border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+    tbody th { background: var(--bg-soft); padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    td { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; padding: 10px 16px; }
+    td::before { content: attr(data-label); font-size: 13px; font-weight: 600; color: var(--muted); padding-top: 1px; }
+    tbody tr td:last-child { border-bottom: 0; }
+  }
+
+  @media (max-width: 480px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    header { padding-top: 0; }
+    a { color: inherit; }
+    .sources a::after { content: " (" attr(href) ")"; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Privatpilotenlizenzen · Vergleich</p>
+    <h1>PPL, LAPL oder UL-Schein?</h1>
+    <p class="lead">Vier Wege zur privaten Fluglizenz: EASA-PPL(A) in Tschechien, PPL nach malaysischem Recht, EASA-LAPL(A) und der nationale Ultraleicht-Schein. Hier stehen Kosten, Mindeststunden, Anerkennung und Rechte nebeneinander.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section aria-labelledby="kosten">
+    <h2 id="kosten">Ausbildungskosten</h2>
+    <p class="intro">Die Zahlen beziehen sich auf die Mindeststundenzahl. Die meisten Flugschüler brauchen mehr Stunden, deshalb fallen die tatsächlichen Kosten in der Regel höher aus.</p>
+
+    <ul class="legend" aria-label="Legende">
+      <li><span class="badge src">Anbieterpreis</span> aus einer Preisliste übernommen</li>
+      <li><span class="badge est">Schätzung</span> eigene Hochrechnung oder Marktspanne</li>
+      <li><span class="badge unv">nicht verifiziert</span> keine aktuelle Primärquelle gefunden</li>
+    </ul>
+
+    <ul class="cards">
+      <li class="card">
+        <h3>EASA-PPL(A)</h3>
+        <div class="sys">Tschechien · EASA</div>
+        <div class="price">ca. 7.600–7.900 €</div>
+        <div class="basis">190.630 Kč inkl. MwSt., 45 Flugstunden auf Cessna 152 (Aeroklub Točná, Preise ab 11.04.2026), umgerechnet zu 24–25 Kč/€</div>
+        <div class="meta"><span class="badge src">Anbieterpreis</span></div>
+      </li>
+      <li class="card">
+        <h3>PPL Malaysia</h3>
+        <div class="sys">Malaysia · CAAM</div>
+        <div class="price">ca. 10.000–19.000 €</div>
+        <div class="basis">Häufig genannt wird ein Kurspreis um 60.000 RM (rund 12.000 €). Die Preisseite der Schule war beim Abruf nicht erreichbar.</div>
+        <div class="meta"><span class="badge unv">nicht verifiziert</span></div>
+      </li>
+      <li class="card">
+        <h3>EASA-LAPL(A)</h3>
+        <div class="sys">EASA-Staaten</div>
+        <div class="price">ca. 5.500–10.000 €</div>
+        <div class="basis">Hochrechnung auf 30 Flugstunden. Am unteren Ende liegen Vereine in Tschechien, am oberen Flugschulen in Deutschland.</div>
+        <div class="meta"><span class="badge est">Schätzung</span></div>
+      </li>
+      <li class="card">
+        <h3>UL-Schein</h3>
+        <div class="sys">National, z. B. Deutschland</div>
+        <div class="price">ca. 5.000–10.000 €</div>
+        <div class="basis">Marktspanne für Deutschland. Sehr günstige Angebote unter 5.000 € decken meist nicht die vollständige Ausbildung ab.</div>
+        <div class="meta"><span class="badge est">Schätzung</span></div>
+      </li>
+    </ul>
+
+    <p class="small footnote">Nicht enthalten sind in der Regel: Fliegerarzt-Untersuchung (Medical), Prüfungs- und Behördengebühren, Lande- und Anfluggebühren an anderen Plätzen, Treibstoffzuschläge, zusätzliche Flugstunden, Reise und Unterkunft. Wechselkurse schwanken.</p>
+  </section>
+
+  <section aria-labelledby="vergleich">
+    <h2 id="vergleich">Direkter Vergleich</h2>
+    <p class="intro">Die wichtigsten Unterschiede liegen in der Anerkennung außerhalb des Ausstellungsstaats und in den Grenzen beim Flugzeug und bei der Zahl der Passagiere.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Kriterium</th>
+            <th scope="col">PPL(A) <span>Tschechien, EASA</span></th>
+            <th scope="col">PPL(A) <span>Malaysia, CAAM</span></th>
+            <th scope="col">LAPL(A) <span>EASA</span></th>
+            <th scope="col">UL-Schein <span>national</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Rechtsgrundlage</th>
+            <td data-label="PPL CZ">EU-Verordnung 1178/2011 (Part-FCL), entspricht ICAO Annex 1</td>
+            <td data-label="PPL MY">Malaysisches Luftrecht (CAAM), entspricht ICAO Annex 1</td>
+            <td data-label="LAPL">Part-FCL; europäische Lizenz ohne ICAO-Entsprechung</td>
+            <td data-label="UL">Nationales Recht, in Deutschland LuftPersV</td>
+          </tr>
+          <tr>
+            <th scope="row">Kosten</th>
+            <td data-label="PPL CZ">ca. 7.600–7.900 € <span class="badge src">Anbieterpreis</span></td>
+            <td data-label="PPL MY">ca. 10.000–19.000 € <span class="badge unv">nicht verifiziert</span></td>
+            <td data-label="LAPL">ca. 5.500–10.000 € <span class="badge est">Schätzung</span></td>
+            <td data-label="UL">ca. 5.000–10.000 € <span class="badge est">Schätzung</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Mindestflugstunden</th>
+            <td data-label="PPL CZ">45, davon mind. 10 Alleinflug</td>
+            <td data-label="PPL MY">mind. 40 nach ICAO Annex 1; Schulen planen meist 45–50 <span class="badge unv">nicht verifiziert</span></td>
+            <td data-label="LAPL">30, davon mind. 6 Alleinflug</td>
+            <td data-label="UL">je nach Land; in Deutschland 30</td>
+          </tr>
+          <tr>
+            <th scope="row">Flugzeuge</th>
+            <td data-label="PPL CZ">Einmotorige Kolbenflugzeuge mit Klassenberechtigung SEP; weitere Klassen und Muster möglich</td>
+            <td data-label="PPL MY">Flugzeuge mit malaysischer Registrierung (9M-) gemäß Berechtigung</td>
+            <td data-label="LAPL">Einmotorige Kolbenflugzeuge und Reisemotorsegler bis 2.000 kg Höchstabflugmasse</td>
+            <td data-label="UL">Ultraleichtflugzeuge; in Deutschland bis 600 kg, max. zwei Sitze</td>
+          </tr>
+          <tr>
+            <th scope="row">Passagiere</th>
+            <td data-label="PPL CZ">Keine lizenzbedingte Obergrenze; begrenzt durch Flugzeug und Berechtigung</td>
+            <td data-label="PPL MY">Keine lizenzbedingte Obergrenze; begrenzt durch Flugzeug und Berechtigung</td>
+            <td data-label="LAPL">Max. 3 (höchstens 4 Personen an Bord), erst nach 10 Stunden als verantwortlicher Pilot nach Lizenzerteilung</td>
+            <td data-label="UL">In der Regel 1</td>
+          </tr>
+          <tr>
+            <th scope="row">Medical</th>
+            <td data-label="PPL CZ">Tauglichkeit Klasse 2</td>
+            <td data-label="PPL MY">Malaysisches Medical Klasse 2</td>
+            <td data-label="LAPL">LAPL-Tauglichkeit (geringere Anforderungen)</td>
+            <td data-label="UL">In Deutschland LAPL-Tauglichkeit</td>
+          </tr>
+          <tr>
+            <th scope="row">Nutzung in Deutschland und anderen EASA-Staaten</th>
+            <td data-label="PPL CZ">Direkt gültig*</td>
+            <td data-label="PPL MY">Nicht direkt gültig. Für Flugzeuge aus EASA-Staaten ist eine befristete Validierung oder eine Umschreibung nötig, siehe unten.</td>
+            <td data-label="LAPL">Direkt gültig*</td>
+            <td data-label="UL">Im Ausstellungsstaat; in anderen Ländern nach deren Regeln, teils mit Einfluggenehmigung</td>
+          </tr>
+          <tr>
+            <th scope="row">Außerhalb Europas</th>
+            <td data-label="PPL CZ">International anerkannt für Flugzeuge aus EASA-Staaten. Für lokal registrierte Flugzeuge ist meist eine Validierung durch den jeweiligen Staat nötig.</td>
+            <td data-label="PPL MY">International anerkannt für malaysische Flugzeuge. Für andere Registrierungen gilt dasselbe.</td>
+            <td data-label="LAPL">Keine ICAO-Anerkennung. Flüge in Drittstaaten nur mit deren Genehmigung.</td>
+            <td data-label="UL">Keine ICAO-Anerkennung</td>
+          </tr>
+          <tr>
+            <th scope="row">Erweiterungen</th>
+            <td data-label="PPL CZ">Nachtflug, Instrumentenflug (IR, BIR), weitere Klassen, Basis für CPL</td>
+            <td data-label="PPL MY">Nach malaysischem Recht, z. B. Nachtflug, Instrumentenflug, CPL</td>
+            <td data-label="LAPL">Nachtflug, Kunstflug, Schlepp. Aufstockung zur PPL(A) mit Anrechnung der LAPL-Ausbildung.</td>
+            <td data-label="UL">Nationale Zusatzberechtigungen; Anrechnung auf LAPL oder PPL nur eingeschränkt, Einzelfallprüfung durch die Flugschule</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="small footnote">* Mit gültiger Klassenberechtigung, gültigem Medical und erfüllten Mindestanforderungen an die fliegerische Erfahrung. EASA-Lizenzen gelten für Luftfahrzeuge, die in einem EASA-Staat registriert sind. Für Flugzeuge mit Registrierung in einem Drittstaat, etwa mit US-Kennzeichen, gelten die Regeln dieses Staates.</p>
+  </section>
+
+  <section aria-labelledby="einordnung">
+    <h2 id="einordnung">Einordnung</h2>
+    <p class="intro">Welche Lizenz passt, hängt vor allem davon ab, wo und mit welchem Flugzeug Sie später fliegen wollen.</p>
+
+    <div class="notes">
+      <div>
+        <h3>EASA-PPL(A) aus Tschechien</h3>
+        <p>Eine in Tschechien erteilte EASA-Lizenz ist dieselbe Lizenz wie eine in Deutschland erteilte. Eine Umschreibung ist nicht nötig. Die Ausbildungskosten liegen bei vielen tschechischen Vereinen unter dem deutschen Niveau. Theorieunterricht und Prüfung finden je nach Anbieter auf Tschechisch oder Englisch statt.</p>
+      </div>
+      <div>
+        <h3>PPL aus Malaysia</h3>
+        <p>Die Lizenz entspricht ICAO-Standard, ist aber keine EASA-Lizenz. In einem EASA-Staat lässt sie sich für höchstens ein Jahr validieren. Für eine Umschreibung in eine EASA-PPL(A) verlangt Part-FCL unter anderem Prüfungen in Luftrecht und Menschlichem Leistungsvermögen, eine praktische Prüfung und mindestens 100 Flugstunden. Direkt nach der Ausbildung ist diese Grenze meist noch nicht erreicht.</p>
+      </div>
+      <div>
+        <h3>LAPL(A)</h3>
+        <p>Die LAPL(A) braucht weniger Ausbildungsstunden und ein einfacheres Medical. Dafür ist sie auf leichte Flugzeuge, drei Passagiere und den EASA-Raum beschränkt. Die Theorie entspricht inzwischen der PPL-Theorie, sodass ein späterer Wechsel zur PPL(A) ohne neue Theorieprüfung möglich ist.</p>
+      </div>
+      <div>
+        <h3>UL-Schein</h3>
+        <p>Der UL-Schein ist der günstigste Einstieg, gilt aber nur für Ultraleichtflugzeuge und richtet sich nach nationalem Recht. Wer ins Ausland fliegen will, muss die Regeln des jeweiligen Ziellandes prüfen.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Zu den Preisen:</strong> Nur der Preis für die PPL(A) in Tschechien stammt direkt aus einer aktuellen Preisliste. Die anderen Werte sind Schätzungen oder Angaben, die nicht in einer Primärquelle bestätigt werden konnten. Ein verbindliches Angebot erhalten Sie nur von der Flugschule selbst. Fragen Sie dabei nach, was im Preis enthalten ist.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="quellen">
+    <h2 id="quellen">Quellen und weiterführende Links</h2>
+    <ul class="sources">
+      <li><a href="https://www.aktocna.cz/ppl">Aeroklub Točná – Ausbildung PPL(A)</a><span>Preisliste und Ausbildungsumfang, Tschechien</span></li>
+      <li><a href="https://mfa.edu.my/courses/ppl/">Malaysian Flying Academy – PPL</a><span>Kursbeschreibung, Malaysia; beim Abruf im Oktober 2026 nicht erreichbar</span></li>
+      <li><a href="https://www.caam.gov.my/">Civil Aviation Authority of Malaysia (CAAM)</a><span>Zuständige Luftfahrtbehörde in Malaysia</span></li>
+      <li><a href="https://www.easa.europa.eu/en/document-library/easy-access-rules/online-publications/easy-access-rules-aircrew-regulation-eu-no?page=7">EASA – Easy Access Rules for Aircrew (Part-FCL)</a><span>Konsolidierter Text u. a. zu FCL.105.A (LAPL) und FCL.210.A (PPL)</span></li>
+      <li><a href="https://eur-lex.europa.eu/eli/reg/2011/1178/oj">Verordnung (EU) Nr. 1178/2011 auf EUR-Lex</a><span>Anhang III: Anerkennung von Lizenzen aus Drittstaaten</span></li>
+      <li><a href="https://www.easa.europa.eu/">EASA – Agentur der Europäischen Union für Flugsicherheit</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Stand: Oktober 2026. Die Angaben dienen der Orientierung und ersetzen keine Auskunft der zuständigen Behörde oder der Flugschule.</p>
+    <p>Keine Rechtsberatung. Vorschriften und Preise können sich ändern.</p>
+  </div>
+</footer>
+
+</body>
+</html>
